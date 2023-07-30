@@ -10,6 +10,7 @@ public class InputFile {
     private Integer previousIntValue;
     private String currentStrValue;
     private String previousStrValue;
+    private boolean exist = false;
 
     public InputFile(String path, boolean stringType) {
         this.path = path;
@@ -21,11 +22,16 @@ public class InputFile {
         }
     }
 
+    public InputFile(String path, boolean stringType, boolean sortTypeAsc) {
+        this.path = path;
+        this.stringType = stringType;
+        this.sortTypeAsc = sortTypeAsc;
+    }
+
     private boolean checkSortTypeInt() {
         ArrayList<Integer> ints = new ArrayList<>();
         boolean sortType = true;
-        try {
-            Reader reader = new Reader(path);
+        try (Reader reader = new Reader(path)) {
             for (int i = 0; ; i++) {
                 ints.add(reader.fileInReaderInt());
                 if (ints.get(i) == null) {
@@ -39,9 +45,10 @@ public class InputFile {
                     break;
                 }
             }
-            reader.closeFile();
+            exist = true;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Входной файл " + path + " не обнаружен.");
+            exist = false;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,8 +58,7 @@ public class InputFile {
     private boolean checkSortTypeStr() {
         ArrayList<String> strings = new ArrayList<>();
         boolean sortType = true;
-        try {
-            Reader reader = new Reader(path);
+        try (Reader reader = new Reader(path)) {
             for (int i = 0; ; i++) {
                 strings.add(reader.fileInReaderStr());
                 if (strings.get(i) == null) {
@@ -66,13 +72,18 @@ public class InputFile {
                     break;
                 }
             }
-            reader.closeFile();
+            exist = true;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Входной файл " + path + " не обнаружен.");
+            exist = false;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return sortType;
+    }
+
+    public boolean isExist() {
+        return exist;
     }
 
     public String getPath() {

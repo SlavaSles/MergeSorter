@@ -1,13 +1,22 @@
 public class OutputFile {
     private String path;
-//    Можно убрать поле stringType
-//    private boolean stringType;
+    private boolean stringType;
     private boolean sortTypeAsc;
+    private String subFolderPath;
 
-    public OutputFile(String path, boolean sortTypeAsc) {
+    public OutputFile(String path, boolean stringType, boolean sortTypeAsc, String subFolderPath) {
         this.path = path;
-//        this.stringType = stringType;
+        this.stringType = stringType;
         this.sortTypeAsc = sortTypeAsc;
+        this.subFolderPath = subFolderPath;
+    }
+
+    public String getSubFolderPath() {
+        return subFolderPath;
+    }
+
+    public void setSubFolderPath(String subFolderPath) {
+        this.subFolderPath = subFolderPath;
     }
 
     public String getPath() {
@@ -18,13 +27,13 @@ public class OutputFile {
         this.path = path;
     }
 
-//    public boolean isStringType() {
-//        return stringType;
-//    }
+    public boolean isStringType() {
+        return stringType;
+    }
 
-//    public void setStringType(boolean stringType) {
-//        this.stringType = stringType;
-//    }
+    public void setStringType(boolean stringType) {
+        this.stringType = stringType;
+    }
 
     public boolean isSortTypeAsc() {
         return sortTypeAsc;

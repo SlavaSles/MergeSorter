@@ -1,100 +1,104 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-// Может надо отнаследовать класс Reader от RandomAccessFile?
-public class Reader {
+public class Reader extends RandomAccessFile {
     private String path;
     private long position;
-    private RandomAccessFile inputFile;
 
     public Reader(String path) throws IOException {
-//        ToDo: Проверить работу программы в случае, если файлы отсутствуют!
+        super(path, "r");
         this.path = path;
-        inputFile = new RandomAccessFile(path, "r");
-        this.position = inputFile.length() - 1;
+        this.position = this.length() - 1;
     }
-
     public Integer fileInReaderInt() throws IOException {
         String line = "";
         Integer number = null;
-        line = inputFile.readLine();
-        if (line != null) {
-            number = Integer.parseInt(line);
-        }
+        do {
+            line = this.readLine();
+            if (line != null && line != "") {
+                try {
+                    number = Integer.parseInt(line);
+                } catch (NumberFormatException e) {
+                    System.err.println("Ошибка преобразования строки в целое число!");;
+                }
+            }
+            if (number != null) {
+                break;
+            }
+        } while (line != null);
         return number;
     }
 
     public String fileInReaderStr() throws IOException {
         String line = "";
         do {
-            line = inputFile.readLine();
+            line = this.readLine();
             if (line == null) {
                 break;
             }
             line = new String(line.getBytes("ISO-8859-1"), "UTF-8");
-        } while (line.length() != line.replaceAll("[\s\t]", "").length());
+        } while (line.length() != line.replaceAll("[\s\t]", "").length() || line.length() == 0);
         return line;
     }
 
     public Integer reverseFileInReaderInt() throws IOException {
-        startLinePosition();
-        if (position < 0) {
-            return null;
-        }
         String line = "";
         Integer number = null;
-        inputFile.seek(position);
-        line = inputFile.readLine();
-        if (line != null) {
-            number = Integer.parseInt(line);
-        }
-        position -= 2;
+        do {
+            startLinePosition();
+            if (position < 0) {
+                return null;
+            }
+            this.seek(position);
+            line = this.readLine();
+            position -= 2;
+            if (line != null || line != "") {
+                try {
+                    number = Integer.parseInt(line);
+                } catch (NumberFormatException e) {
+                    System.err.println("Ошибка преобразования строки в целое число!");
+                }
+                if (number != null) {
+                    break;
+                }
+            }
+        } while (line != null);
         return number;
     }
-//    Todo: Файл не должен заканчивааться пустой строкой, иначе он будет игнорироваться
     public String reverseFileInReaderStr() throws IOException {
-        startLinePosition();
-        if (position < 0) {
-            return null;
-        }
-        boolean repeat;
         String line = "";
+        String string = null;
         do {
-            inputFile.seek(position);
-            line = inputFile.readLine();
+            startLinePosition();
+            if (position < 0) {
+                return null;
+            }
+            this.seek(position);
+            line = this.readLine();
+            position -= 2;
             if (line == null) {
                 break;
             }
             line = new String(line.getBytes("ISO-8859-1"), "UTF-8");
-            repeat = line.length() != line.replaceAll("[\s\t]", "").length();
-            if (repeat) {
-                position -= 2;
-                startLinePosition();
+            if (line.length() == line.replaceAll("[\s\t]", "").length() && line.length() != 0) {
+                string = line;
             }
-        } while (repeat);
-        position -= 2;
-        return line;
+        } while (string == null);
+        return string;
     }
 
     private void startLinePosition() throws IOException {
         int symbol;
         while (position > 0) {
-            inputFile.seek(position);
-            symbol = inputFile.read();
-            if (symbol == 10) {
+            this.seek(position);
+            symbol = this.read();
+            if (symbol == 10 && position != (this.length() - 1)) {
                 position++;
                 break;
+            } else if (symbol == 10 && position == (this.length() - 1)) {
+                position--;
             }
             position--;
         }
-    }
-
-    public void closeFile() throws IOException {
-        inputFile.close();
-    }
-
-    public RandomAccessFile getInputFile() {
-        return inputFile;
     }
 }

@@ -7,6 +7,8 @@ a s data/out.txt data/in1Str.txt
 -d -s data/out.txt
 -a -s data/out.txt data/in1Str.tx[t
 -d -i data/out.txt data/in1Str.txt data/in2{Str.txt
+a -i data/out.txt data/in1.txt data/in2.txt
+
 -a -s data/out.txt data/in1Str.txt
 -a -s data/out.txt data/in1Str.txt data/in2Str.txt
 -a -s data/out.txt data/in1Str.txt data/in2Str.txt data/in3Str.txt

@@ -1,6 +1,8 @@
-cancer
-horse
-Хлеб
-Экскаватор
-Uncle
+
 антенна
+Uncle
+Экскаватор
+
+Хлеб
+horse
+cancer

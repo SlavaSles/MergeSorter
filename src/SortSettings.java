@@ -1,12 +1,23 @@
 import java.util.ArrayList;
 
 public class SortSettings {
+//    ToDo: исправить Regex
+    public static final String FILENAME_REGEX = "^((((\\w+([\\-_]?\\w+)*)/)*)?\\w*([\\-_]?\\w*)*\\.txt)$";
     private boolean stringType = false;
     private boolean sortTypeAsc = true;
     private ArrayList<String> inFilePathes = new  ArrayList<>();
     private ArrayList<String> outFilePathes = new  ArrayList<>();
+    private String subFolderPath;
 
     public SortSettings() {
+    }
+
+    public String getSubFolderPath() {
+        return subFolderPath;
+    }
+
+    public void setSubFolderPath(String subFolderPath) {
+        this.subFolderPath = subFolderPath;
     }
 
     public boolean isStringType() {
