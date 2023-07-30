@@ -49,11 +49,9 @@ public class SorterLogic {
             System.out.println(step + ". Удаление временных файлов.");
             deleteTemporaryFiles(outputFiles);
             System.out.println("Сортировка слиянием завершена.");
-        } catch (
-        FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (
-        IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -139,19 +137,5 @@ public class SorterLogic {
             File errorFile = new File(UnsortedPart.getErrorFilePaths().get(i));
             errorFile.delete();
         }
-//        File[] files = directory.listFiles();
-//        for (File file : files) {
-//            String name = file.getName();
-//            Pattern pattern1 = Pattern.compile("^errorFile\\d+\\.txt$");
-//            Matcher matcher1 = pattern1.matcher(name);
-//            if (matcher1.find()) {
-//                file.delete();
-//            }
-//            Pattern pattern2 = Pattern.compile("^out[1]?Temp\\d+\\.txt$");
-//            Matcher matcher2 = pattern2.matcher(name);
-//            if (matcher2.find()) {
-//                file.delete();
-//            }
-//        }
     }
 }

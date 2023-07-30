@@ -38,7 +38,6 @@ public class ImportSettings {
                 if (matcher.find()) {
                     if (!outputFilenameIsExist) {
                         sortSettings.getOutFilePathes().add(matcher.group(1).trim());
-//                        ToDo: Убрать папки из пути!
                         sortSettings.setSubFolderPath((matcher.group(2) != null) ? matcher.group(2) : "");
                         sortSettings.getOutFilePathes().add(sortSettings.getSubFolderPath() + "outTemp1.txt");
                         sortSettings.getOutFilePathes().add(sortSettings.getSubFolderPath() + "outTemp2.txt");

@@ -17,7 +17,6 @@ public class UnsortedPart {
 
     public static String findAnotherCurrentStrValue(InputFile input, Reader reader, OutputFile output) throws IOException{
         errorFilesIndex++;
-//        ToDo: Убрать папки из пути!
         errorFilePaths.add(output.getSubFolderPath() + "errorFile" + (errorFilesIndex + 1) + ".txt");
         String firstStrValue = input.getPreviousStrValue();
         String wrongStrValue = input.getCurrentStrValue();
@@ -64,7 +63,6 @@ public class UnsortedPart {
     
     public static Integer findAnotherCurrentIntValue(InputFile input, Reader reader, OutputFile output) throws IOException {
         errorFilesIndex++;
-//        ToDo: Убрать папки из пути!
         errorFilePaths.add(output.getSubFolderPath() + "errorFile" + (errorFilesIndex + 1) + ".txt");
         int wrongIntValue = input.getCurrentIntValue();
         int firstIntValue = input.getPreviousIntValue();

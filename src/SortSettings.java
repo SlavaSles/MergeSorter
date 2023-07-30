@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class SortSettings {
-//    ToDo: исправить Regex
     public static final String FILENAME_REGEX = "^((((\\w+([\\-_]?\\w+)*)/)*)?\\w*([\\-_]?\\w*)*\\.txt)$";
     private boolean stringType = false;
     private boolean sortTypeAsc = true;
